@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   View,
@@ -11,63 +11,55 @@ import {
   ScrollView,
 } from 'react-native';
 
-
-const Signin = ({ navigation }) => {
-  const [uname, setuname] = useState("");
-  const [pass, setpass] = useState("");
-
+const Signin = ({navigation}) => {
+  const [uname, setuname] = useState('');
+  const [pass, setpass] = useState('');
 
   const sign_up = () => {
-
-    fetch("http://10.0.2.2:5000/api/signUp", {
-      method: "POST",
+    fetch('http://10.0.2.2:5000/api/signUp', {
+      method: 'POST',
       body: JSON.stringify({
-        username: "Admin",
-        password: "admin",
+        username: 'Admin',
+        password: 'admin',
       }),
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
+        'Content-type': 'application/json; charset=UTF-8',
       },
     })
-      .then((response) => response.json())
-      .then((json) => json)
-      .catch((error) => error);
+      .then(response => response.json())
+      .then(json => json)
+      .catch(error => error);
   };
 
-
   const sign_in = async () => {
-
     await fetch(`http://10.0.2.2:5000/api/signIn`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({
-        "username": uname,
-        "password": pass
+        username: uname,
+        password: pass,
       }),
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
-      .then((response) => {
+      .then(response => response.json())
+      .then(response => {
         if (response.status == 1) {
           navigation.navigate('Home');
         } else {
-          alert(response.msg)
+          alert(response.msg);
         }
-      })
-
+      });
   };
-
-
 
   return (
     <>
-      <View style={{ backgroundColor: 'white' }}>
+      <View style={{backgroundColor: 'white'}}>
         <ScrollView>
           <View style={styles.container}>
             <Image style={styles.myLogo} source={require('../media/smi.png')} />
-            <Text style={{ color: 'green', fontWeight: 'bold', fontSize: 18 }}>
+            <Text style={{color: 'green', fontWeight: 'bold', fontSize: 18}}>
               TIME TABLE MANAGER
             </Text>
             <TextInput
@@ -86,7 +78,7 @@ const Signin = ({ navigation }) => {
             <TouchableOpacity
               style={styles.btn_sign_up}
               onPress={() => {
-                sign_up()
+                sign_up();
                 // navigation.navigate('Home');
               }}>
               <Icon name="sign-in" size={15} color="white" />
@@ -94,9 +86,10 @@ const Signin = ({ navigation }) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                sign_in()
+                sign_in();
                 // navigation.navigate('Home');
               }}>
+              <Text>hello to check</Text>
               <Icon name="sign-in" size={30} color="white" />
             </TouchableOpacity>
           </View>
@@ -106,7 +99,7 @@ const Signin = ({ navigation }) => {
             display: 'flex',
             alignItems: 'center',
           }}>
-          <Text style={{ color: 'maroon' }}>
+          <Text style={{color: 'maroon'}}>
             Allright Reserved to Smiu.edu.pk
           </Text>
         </View>
